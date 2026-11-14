@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#0d1220">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rohan Chauhan Trades Journals</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f1e8;--card:#fffdf7;--ink:#1b1a17;--mut:#7a7566;--line:#e3dcc8;--gold:#a87a14;--up:#0f8a5f;--dn:#c8372d;--sh:rgba(60,45,10,.08);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1220;--card:#151c30;--ink:#ece8da;--mut:#8b93a8;--line:#242d47;--gold:#e0b44c;--up:#35d399;--dn:#ff6b60;--sh:rgba(0,0,0,.35);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1220;--card:#151c30;--ink:#ece8da;--mut:#8b93a8;--line:#242d47;--gold:#e0b44c;--up:#35d399;--dn:#ff6b60;--sh:rgba(0,0,0,.35);color-scheme:dark}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Sora,system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+main{max-width:560px;margin:0 auto;padding:14px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+h1{font-size:20px;margin:0;color:var(--gold);letter-spacing:.2px}
+h2{font-size:15px;margin:18px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 4px 14px var(--sh)}
+.hero{font-size:34px;font-weight:700;line-height:1.1}
+.sub{color:var(--mut);font-size:12.5px}
+.up{color:var(--up)}.dn{color:var(--dn)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.k{font-size:18px;font-weight:600}
+label{display:block;font-size:12px;color:var(--mut);margin:8px 0 3px}
+input,select,textarea,button{font:inherit;color:var(--ink)}
+input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
+.btn{background:var(--gold);color:#14110a;border:0;border-radius:10px;padding:11px 16px;font-weight:700;width:100%;margin-top:12px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.sm{width:auto;padding:6px 10px;margin:0;font-size:12px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;background:none;border:0;color:var(--mut);font-size:11px;padding:6px 0;cursor:pointer}
+nav button b{display:block;font-size:19px;font-weight:400}
+nav button.on{color:var(--gold)}
+.alert{border-left:4px solid var(--dn);background:var(--card);padding:10px 12px;border-radius:10px;margin-bottom:10px;font-size:13.5px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal div{aspect-ratio:1;border-radius:8px;font-size:11px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg);border:1px solid var(--line)}
+.cal .h{aspect-ratio:auto;background:none;border:0;color:var(--mut)}
+.chk{display:flex;gap:8px;align-items:center;margin:6px 0;font-size:13.5px;color:var(--ink)}
+.chk input{width:auto}
+.v{display:none}.v.on{display:block}
+svg{width:100%;height:auto;display:block}
+.bar{height:8px;border-radius:6px;background:var(--bg);border:1px solid var(--line);overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--gold)}.bdg{display:inline-block;border:1px solid var(--line);border-radius:20px;padding:3px 10px;margin:3px 3px 0 0;font-size:12px;color:var(--mut)}.bdg.on{border-color:var(--gold);color:var(--gold)}.tw{overflow-x:auto}
+@media (prefers-reduced-motion:no-preference){.hero{transition:opacity .3s}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>Rohan Chauhan Trades Journals</h1><button class="btn ghost sm" id="th">Theme</button></header>
+
+<section class="v on" id="v-dash"></section>
+
+<section class="v" id="v-add">
+<div class="card">
+<h2 style="margin-top:0">Naya trade</h2>
+<label>Date aur time</label><input type="datetime-local" id="f-date">
+<div class="grid">
+<div><label>Direction</label><select id="f-dir"><option value="buy">Buy</option><option value="sell">Sell</option></select></div>
+<div><label>Lots</label><input id="f-lots" type="number" step="0.01" value="0.01"></div>
+<div><label>Entry</label><input id="f-entry" type="number" step="0.01"></div>
+<div><label>Stop loss</label><input id="f-sl" type="number" step="0.01"></div>
+<div><label>Exit</label><input id="f-exit" type="number" step="0.01"></div>
+<div><label>Fees (commission + swap, $)</label><input id="f-fee" type="number" step="0.01" value="0"></div>
+<div><label>Session</label><select id="f-ses"><option>Asia</option><option selected>London</option><option>New York</option><option>Overlap</option></select></div>
+<div><label>Setup</label><select id="f-tag"><option>Breakout</option><option>Pullback</option><option>Reversal</option><option>News</option><option>Other</option></select></div>
+<div><label>Galti</label><select id="f-mis"><option>Koi nahi</option><option>FOMO</option><option>Revenge</option><option>Overtrade</option><option>SL hataya</option><option>Early exit</option></select></div>
+<div><label>Mood</label><select id="f-mood"><option>Calm</option><option>Excited</option><option>Anxious</option><option>Angry</option></select></div>
+<div><label>News din</label><select id="f-news"><option>Koi nahi</option><option>NFP</option><option>FOMC</option><option>CPI</option><option>Other</option></select></div>
+</div>
+<label>Trade se pehle checklist</label>
+<div class="chk"><input type="checkbox" id="c1"><span>Setup mere rules se match hua</span></div>
+<div class="chk"><input type="checkbox" id="c2"><span>Stop loss laga diya</span></div>
+<div class="chk"><input type="checkbox" id="c3"><span>Risk 1% ke andar hai</span></div>
+<label>Note <button class="btn ghost sm" id="mic" style="display:none">🎤 Bolo</button></label><textarea id="f-note" rows="2"></textarea>
+<button class="btn" id="save">Trade save karo</button>
+<div class="sub" id="msg" style="margin-top:8px"></div>
+</div>
+</section>
+
+<section class="v" id="v-list"></section>
+<section class="v" id="v-cal"></section>
+
+<section class="v" id="v-lab"></section>
+<section class="v" id="v-tools">
+<div class="card">
+<h2 style="margin-top:0">XAUUSD lot calculator</h2>
+<div class="grid">
+<div><label>Balance ($)</label><input id="l-bal" type="number" value="1000"></div>
+<div><label>Risk %</label><input id="l-risk" type="number" step="0.1" value="1"></div>
+</div>
+<label>Stop loss distance ($ price move)</label><input id="l-sl" type="number" step="0.1" value="5">
+<button class="btn" id="lc">Lot nikalo</button>
+<div class="k" id="l-out" style="margin-top:10px"></div>
+<div class="sub">1 lot = 100 oz, yaani $1 move = $100.</div>
+</div>
+<div class="card">
+<h2 style="margin-top:0">Daily loss limit</h2>
+<label>Aaj ka max loss ($, 0 = off)</label><input id="lim" type="number" step="1">
+<label>Hafte ka max loss ($, 0 = off)</label><input id="s-wl" type="number" step="1">
+<label>Account balance ($)</label><input id="s-bal" type="number" step="1">
+<label>Monthly profit goal ($)</label><input id="s-goal" type="number" step="1">
+<label>AI provider</label><select id="s-ai"><option value="claude">Built-in (Claude, key nahi chahiye)</option><option value="gemini">Gemini (free API key)</option></select>
+<label>Gemini API key</label><input id="s-gk" type="password">
+<label>Gemini model</label><input id="s-gm" placeholder="gemini-2.5-flash">
+<label>Har trade save ke baad AI review</label><select id="s-auto"><option value="">Band</option><option value="1">Chalu</option></select>
+</div>
+<div class="card">
+<h2 style="margin-top:0">MT5 import</h2>
+<div class="sub">MT5 mein Account History, Positions, right click, Report ya Export se CSV banao. Excel file ho toh CSV mein Save As karo.</div>
+<input type="file" id="imp" accept=".csv,.txt" style="margin-top:8px">
+<div class="sub" id="imsg" style="margin-top:6px"></div>
+</div>
+<div class="card">
+<h2 style="margin-top:0">Demo data</h2><div class="sub">40 sample trades load karke saari screens dekho. Aapke asli trades ko nahi chhuta.</div><button class="btn" id="dl">Demo data load karo</button><button class="btn ghost" id="dr">Demo data hatao</button></div>
+<div class="card">
+<h2 style="margin-top:0">Backup</h2>
+<button class="btn" id="exp">Backup file download</button>
+<label>Backup se restore</label><input type="file" id="rst" accept=".json">
+<button class="btn ghost" id="clr">Saara data delete</button>
+</div>
+</section>
+</main>
+
+<nav id="nav">
+<button data-v="dash" class="on"><b>◧</b>Home</button>
+<button data-v="add"><b>＋</b>Add</button>
+<button data-v="list"><b>≡</b>Trades</button>
+<button data-v="cal"><b>▦</b>Insights</button>
+<button data-v="lab"><b>◈</b>Lab</button>
+<button data-v="tools"><b>⚙</b>Tools</button>
+</nav>
+
+<script>
+const $=s=>document.querySelector(s);
+let T=[],LIM=0,cm=new Date(),S={wl:0,bal:1000,goal:0,ai:'gemini',gk:'',gm:'gemini-2.5-flash'},PB=[];
+try{T=JSON.parse(localStorage.getItem('gj_t')||'[]');LIM=+localStorage.getItem('gj_lim')||0;S=Object.assign(S,JSON.parse(localStorage.getItem('gj_s')||'{}'));PB=JSON.parse(localStorage.getItem('gj_pb')||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem('gj_t',JSON.stringify(T));localStorage.setItem('gj_lim',LIM);localStorage.setItem('gj_s',JSON.stringify(S));localStorage.setItem('gj_pb',JSON.stringify(PB))}catch(e){}};
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const money=v=>(v<0?'-':'')+'$'+Math.abs(v).toFixed(2);
+const cls=v=>v>=0?'up':'dn';
+const sorted=()=>[...T].sort((a,b)=>a.date.localeCompare(b.date));
+const day=t=>t.date.slice(0,10);
+const ld=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+function stats(a){
+  const n=a.length,w=a.filter(t=>t.pnl>0),l=a.filter(t=>t.pnl<0);
+  const net=a.reduce((s,t)=>s+t.pnl,0),gp=w.reduce((s,t)=>s+t.pnl,0),gl=Math.abs(l.reduce((s,t)=>s+t.pnl,0));
+  let eq=0,pk=0,dd=0;
+  a.forEach(t=>{eq+=t.pnl;pk=Math.max(pk,eq);dd=Math.max(dd,pk-eq)});
+  const rs=a.filter(t=>t.r!=null);
+  return{n,wr:n?w.length/n*100:0,net,pf:gl?gp/gl:(gp?99:0),exp:n?net/n:0,dd,avgR:rs.length?rs.reduce((s,t)=>s+t.r,0)/rs.length:0};
+}
+function disc(){const a=T.filter(t=>t.chk!=null);return a.length?Math.round(a.filter(t=>t.chk===3).length/a.length*100):null}
+
+function chart(a){
+  if(a.length<2)return '<div class="sub">Equity curve ke liye kam se kam 2 trades chahiye.</div>';
+  let e=0;const p=[0,...a.map(t=>e+=t.pnl)];
+  const mn=Math.min(...p),mx=Math.max(...p),r=(mx-mn)||1;
+  const pts=p.map((v,i)=>(i/(p.length-1)*300).toFixed(1)+','+(110-(v-mn)/r*100).toFixed(1)).join(' ');
+  const z=110-(0-mn)/r*100;
+  return `<svg viewBox="0 0 300 120" role="img" aria-label="Equity curve"><line x1="0" x2="300" y1="${z}" y2="${z}" stroke="var(--line)" stroke-dasharray="3 3"/><polyline points="${pts}" fill="none" stroke="var(--gold)" stroke-width="2.2" stroke-linejoin="round"/></svg>`;
+}
+
+function dash(){
+  const a=sorted(),s=stats(a),d=disc();
+  const today=ld(new Date());
+  const tp=a.filter(t=>day(t)===today).reduce((x,t)=>x+t.pnl,0);
+  let al='';
+  if(LIM>0&&tp<=-LIM)al+=`<div class="alert"><b>Daily loss limit hit.</b> Aaj ${money(tp)}. Aaj ke liye trading band karo.</div>`;
+  const wk=new Date();wk.setDate(wk.getDate()-((wk.getDay()+6)%7));const w0=ld(wk),wp=a.filter(t=>day(t)>=w0).reduce((x,t)=>x+t.pnl,0);if(S.wl>0&&wp<=-S.wl)al+=`<div class="alert"><b>Weekly loss limit hit.</b> Is hafte ${money(wp)}.</div>`;const last3=a.slice(-3);
+  if(last3.length===3&&last3.every(t=>t.pnl<0))al+=`<div class="alert"><b>Tilt alert.</b> Lagatar 3 loss. 30 minute ka break lo.</div>`;
+  $('#v-dash').innerHTML=al+`<div class="card"><div class="sub">Net P&amp;L</div><div class="hero ${cls(s.net)}">${money(s.net)}</div><div class="sub">Aaj: <span class="${cls(tp)}">${money(tp)}</span> · ${s.n} trades</div></div>
+  <div class="grid"><div class="card"><div class="sub">Win rate</div><div class="k">${s.wr.toFixed(0)}%</div></div>
+  <div class="card"><div class="sub">Profit factor</div><div class="k">${s.pf.toFixed(2)}</div></div>
+  <div class="card"><div class="sub">Expectancy</div><div class="k ${cls(s.exp)}">${money(s.exp)}</div></div>
+  <div class="card"><div class="sub">Max drawdown</div><div class="k dn">${money(-s.dd)}</div></div>
+  <div class="card"><div class="sub">Avg R</div><div class="k">${s.avgR.toFixed(2)}R</div></div>
+  <div class="card"><div class="sub">Discipline score</div><div class="k">${d==null?'–':d+'%'}</div></div></div>
+  <div class="card"><div class="sub" style="margin-bottom:6px">Equity curve</div>${chart(a)}</div>`;
+  if(!T.length)$('#v-dash').innerHTML+='<div class="card sub">Abhi koi trade nahi hai. Add tab se pehla trade daalo ya Tools mein MT5 CSV import karo.</div>';
+}
+
+function list(){
+  const a=sorted().reverse();
+  $('#v-list').innerHTML='<h2>Saare trades</h2><div class="card">'+(a.length?a.map(t=>`<div class="row"><div><b>${t.dir==='buy'?'Buy':'Sell'} ${esc(t.lots)} lot</b> <span class="sub">${esc(t.sym||'XAUUSD')}</span><div class="sub">${esc(t.date.replace('T',' '))} · ${esc(t.ses||'')} ${esc(t.tag||'')}${t.mis&&t.mis!=='Koi nahi'?' · '+esc(t.mis):''}</div>${t.note?`<div class="sub">${esc(t.note)}</div>`:''}</div><div style="text-align:right"><div class="k ${cls(t.pnl)}">${money(t.pnl)}</div><div class="sub">${t.r!=null?t.r.toFixed(2)+'R':''}</div><select data-mis="${t.id}" style="width:auto;padding:4px;font-size:12px;margin-bottom:4px">${['Koi nahi','FOMO','Revenge','SL hataya','Overtrade','Early exit'].map(o=>`<option${o===t.mis?' selected':''}>${o}</option>`).join('')}</select><br><button class="btn ghost sm" data-del="${t.id}">Delete</button></div></div>`).join(''):'<div class="sub">Koi trade nahi.</div>')+'</div>';
+}
+
+function group(a,fn){
+  const m={};a.forEach(t=>{const k=fn(t);if(k)(m[k]=m[k]||[]).push(t)});
+  return Object.entries(m).map(([k,v])=>({k,...stats(v)})).sort((x,y)=>y.net-x.net);
+}
+function gtab(title,rows){
+  if(!rows.length)return '';
+  return `<div class="card"><div class="sub" style="margin-bottom:4px">${title}</div>`+rows.map(r=>`<div class="row"><span>${esc(r.k)} <span class="sub">${r.n} trades · ${r.wr.toFixed(0)}% win</span></span><b class="${cls(r.net)}">${money(r.net)}</b></div>`).join('')+'</div>';
+}
+function insights(a){
+  const out=[];if(a.length<5)return '<div class="sub">Insights ke liye 5+ trades chahiye.</div>';
+  const W=['Ravivaar','Somvaar','Mangalvaar','Budhvaar','Guruvaar','Shukravaar','Shanivaar'];
+  const chk=(rows,label)=>{if(rows.length>1){const w=rows[rows.length-1],b=rows[0];if(w.net<0)out.push(`${label}: <b>${esc(w.k)}</b> mein sabse zyada loss (${money(w.net)}). Yahan size kam karo ya trade avoid karo.`);if(b.net>0)out.push(`${label}: <b>${esc(b.k)}</b> sabse acha (${money(b.net)}).`)}};
+  chk(group(a,t=>t.ses),'Session');
+  chk(group(a,t=>W[new Date(t.date).getDay()]),'Din');
+  chk(group(a,t=>t.tag),'Setup');
+  const mis=group(a,t=>t.mis&&t.mis!=='Koi nahi'?t.mis:null);
+  if(mis.length){const m=mis[mis.length-1];if(m.net<0)out.push(`Galti jo sabse mehngi padi: <b>${esc(m.k)}</b> (${m.n} baar, ${money(m.net)}).`)}
+  const nz=a.filter(t=>t.chk!=null),full=nz.filter(t=>t.chk===3),part=nz.filter(t=>t.chk<3);
+  if(full.length>2&&part.length>2)out.push(`Checklist poori hone par avg ${money(stats(full).exp)}, adhuri par ${money(stats(part).exp)} per trade.`);
+  const mo=group(a,t=>t.mood);if(mo.length>1&&mo[mo.length-1].net<0)out.push(`Mood <b>${esc(mo[mo.length-1].k)}</b> mein trade karne par loss ho raha hai.`);
+  return '<div class="card">'+(out.length?out.map(o=>`<div class="row"><span>${o}</span></div>`).join(''):'<div class="sub">Abhi koi saaf pattern nahi mila.</div>')+'</div>';
+}
+function calendar(){
+  const a=sorted(),y=cm.getFullYear(),m=cm.getMonth();
+  const dm={};a.forEach(t=>{dm[day(t)]=(dm[day(t)]||0)+t.pnl});
+  const first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate();
+  const mx=Math.max(1,...Object.values(dm).map(Math.abs));
+  let c=['S','M','T','W','T','F','S'].map(x=>`<div class="h">${x}</div>`).join('');
+  for(let i=0;i<first;i++)c+='<div class="h"></div>';
+  for(let d=1;d<=dim;d++){
+    const k=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,v=dm[k];
+    const st=v==null?'':`background:color-mix(in srgb,${v>=0?'var(--up)':'var(--dn)'} ${Math.round(18+Math.abs(v)/mx*62)}%,var(--bg))`;
+    c+=`<div style="${st}">${d}${v!=null?`<b style="font-size:10px">${Math.round(v)}</b>`:''}</div>`;
+  }
+  $('#v-cal').innerHTML=`<div class="card"><div class="row" style="border:0"><button class="btn ghost sm" id="pm">‹</button><b>${cm.toLocaleString('en',{month:'long',year:'numeric'})}</b><button class="btn ghost sm" id="nm">›</button></div><div class="cal">${c}</div></div><h2>Smart insights</h2>${insights(a)}`+gtab('Session wise',group(a,t=>t.ses))+gtab('Setup wise',group(a,t=>t.tag))+gtab('News din wise',group(a,t=>t.news&&t.news!=='Koi nahi'?t.news:null))+'<h2>Psychology</h2>'+gtab('Mood wise',group(a,t=>t.mood))+gtab('Galti ki keemat',group(a,t=>t.mis&&t.mis!=='Koi nahi'?t.mis:null));
+}
+function mc(a){
+  const p=a.map(t=>t.pnl);if(p.length<10)return '<div class="sub">Monte Carlo ke liye 10+ trades chahiye.</div>';
+  const N=500,L=100,fin=[],dds=[];
+  for(let s=0;s<N;s++){let e=0,pk=0,dd=0;for(let i=0;i<L;i++){e+=p[Math.random()*p.length|0];pk=Math.max(pk,e);dd=Math.max(dd,pk-e)}fin.push(e);dds.push(dd)}
+  fin.sort((x,y)=>x-y);dds.sort((x,y)=>x-y);const q=(v,x)=>v[Math.floor(x*(v.length-1))];
+  const r=(l,v)=>`<div class="row"><span>${l}</span><b class="${cls(v)}">${money(v)}</b></div>`;
+  return r('Agle 100 trades, median',q(fin,.5))+r('Kharab case (5%)',q(fin,.05))+r('Acha case (95%)',q(fin,.95))+`<div class="row"><span>Profit ki probability</span><b>${(fin.filter(v=>v>0).length/N*100).toFixed(0)}%</b></div>`+r('Worst drawdown (95%)',-q(dds,.95));
+}
+function lab(){
+  const a=sorted(),s=stats(a),d=disc(),dm={};
+  a.forEach(t=>dm[day(t)]=(dm[day(t)]||0)+t.pnl);
+  const days=Object.keys(dm).sort();let gs=0;for(let i=days.length-1;i>=0&&dm[days[i]]>0;i--)gs++;
+  let ds=0;for(let i=a.length-1;i>=0&&a[i].chk===3;i--)ds++;
+  const mk=ld(new Date()).slice(0,7),mp=a.filter(t=>t.date.startsWith(mk)).reduce((x,t)=>x+t.pnl,0);
+  const gp=S.goal>0?Math.max(0,Math.min(100,mp/S.goal*100)):0;
+  const rk=s.n<20?'Beginner':(d>=70&&s.pf>=1.3?'Pro':(d>=60?'Disciplined':'Learner'));
+  const B=[['Pehla trade',s.n>=1],['10 trades',s.n>=10],['50 trades',s.n>=50],['3 din green',gs>=3],['Discipline 80%+',s.n>=10&&d>=80],['PF 1.5+',s.n>=20&&s.pf>=1.5]];
+  const rs=a.filter(t=>t.sl!=null).map(t=>Math.abs(t.entry-t.sl)*t.lots*100);
+  const ar=rs.length?rs.reduce((x,y)=>x+y,0)/rs.length:0,mr=rs.length?Math.max(...rs):0;
+  const g=Object.fromEntries(group(a,t=>t.tag).map(r=>[r.k,r]));
+  $('#v-lab').innerHTML=`<div class="card"><div class="sub">AI Coach (${S.ai==='gemini'?'Gemini':'Claude'})</div><button class="btn" id="ai1">Aakhri trade ka review</button><button class="btn ghost" id="ai2">Weekly report</button><label>Journal se poocho</label><input id="ai-q" placeholder="Mera sabse acha setup kaunsa hai?"><button class="btn ghost" id="ai3">Poocho</button><button class="btn ghost" id="ai4">AI se galti tag karo</button><div id="ai-out" style="white-space:pre-wrap;margin-top:10px;font-size:14px"></div></div><div class="card"><div class="sub">Rank</div><div class="hero" style="font-size:26px">${rk}</div>
+  <div class="row"><span>Green din streak</span><b>${gs}</b></div><div class="row"><span>Disciplined trades streak</span><b>${ds}</b></div>
+  <div class="sub" style="margin-top:8px">Monthly goal: ${money(mp)} / ${S.goal>0?money(S.goal):'set nahi (Tools)'}</div><div class="bar"><i style="width:${gp}%"></i></div>
+  <div>${B.map(b=>`<span class="bdg ${b[1]?'on':''}">${b[0]}</span>`).join('')}</div></div>
+  <div class="card"><div class="sub" style="margin-bottom:4px">Risk per trade (SL wale trades)</div>
+  <div class="row"><span>Average risk</span><b>${money(ar)}${S.bal>0?` (${(ar/S.bal*100).toFixed(1)}%)`:''}</b></div>
+  <div class="row"><span>Sabse bada risk</span><b class="${S.bal>0&&mr/S.bal>.02?'dn':''}">${money(mr)}${S.bal>0?` (${(mr/S.bal*100).toFixed(1)}%)`:''}</b></div></div>
+  <h2>Playbook</h2><div class="card"><label style="margin-top:0">Setup ka naam</label><input id="pb-n"><label>Rules</label><textarea id="pb-r" rows="2"></textarea><label>Ideal entry</label><input id="pb-e"><button class="btn" id="pbadd">Setup add karo</button></div>
+  ${PB.length?'<div class="card">'+PB.map((p,i)=>`<div class="row"><div><b>${esc(p.name)}</b><div class="sub">${esc(p.rules)}</div><div class="sub">Entry: ${esc(p.entry)}</div>${g[p.name]?`<div class="sub">${g[p.name].n} trades · ${g[p.name].wr.toFixed(0)}% win · <span class="${cls(g[p.name].net)}">${money(g[p.name].net)}</span></div>`:''}</div><button class="btn ghost sm" data-pbdel="${i}">Delete</button></div>`).join('')+'</div>':''}
+  <h2>Monte Carlo (500 simulation)</h2><div class="card">${mc(a)}<div class="sub" style="margin-top:6px">Aapke past trades ko random order mein chalakar andaza. Yeh guarantee nahi hai.</div></div>`;
+}
+function fillTags(){const s=$('#f-tag'),v=s.value;s.innerHTML=[...new Set(['Breakout','Pullback','Reversal','News','Other',...PB.map(p=>p.name)])].map(x=>`<option>${esc(x)}</option>`).join('');s.value=v||'Breakout'}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.pbdel!=null){PB.splice(+b.dataset.pbdel,1);save();render()}
+  if(b.id==='pbadd'){const n=$('#pb-n').value.trim();if(!n)return;PB.push({name:n,rules:$('#pb-r').value,entry:$('#pb-e').value});save();render()}});
+function render(){dash();list();calendar();lab();fillTags()}
+const cu=n=>window.claude?window.claude.use(n).catch(()=>null):Promise.resolve(null);
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.v){document.querySelectorAll('.v').forEach(x=>x.classList.remove('on'));$('#v-'+b.dataset.v).classList.add('on');document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('on',x===b));scrollTo(0,0)}
+  if(b.dataset.del){T=T.filter(t=>t.id!==b.dataset.del);save();render()}
+  if(b.id==='pm'){cm=new Date(cm.getFullYear(),cm.getMonth()-1,1);calendar()}
+  if(b.id==='nm'){cm=new Date(cm.getFullYear(),cm.getMonth()+1,1);calendar()}
+});
+
+const now=new Date();now.setMinutes(now.getMinutes()-now.getTimezoneOffset());$('#f-date').value=now.toISOString().slice(0,16);
+$('#save').onclick=()=>{
+  const g=id=>$('#'+id).value,n=id=>parseFloat(g(id));
+  const en=n('f-entry'),ex=n('f-exit'),lots=n('f-lots'),sl=n('f-sl'),fee=n('f-fee')||0,dir=g('f-dir');
+  if(isNaN(en)||isNaN(ex)||isNaN(lots)){$('#msg').textContent='Entry, exit aur lots bharna zaroori hai.';return}
+  const gross=(ex-en)*(dir==='buy'?1:-1)*lots*100;
+  const r=!isNaN(sl)&&sl!==en?gross/(Math.abs(en-sl)*lots*100):null;
+  const chk=['c1','c2','c3'].filter(c=>$('#'+c).checked).length;
+  T.push({id:Date.now()+''+Math.random().toString(36).slice(2,5),date:g('f-date'),sym:'XAUUSD',dir,lots,entry:en,sl:isNaN(sl)?null:sl,exit:ex,fee,pnl:gross-Math.abs(fee),r,ses:g('f-ses'),tag:g('f-tag'),mis:g('f-mis'),mood:g('f-mood'),news:g('f-news'),chk,note:g('f-note')});
+  save();render();$('#msg').textContent='Trade save ho gaya.';if(S.auto)autoRev();['c1','c2','c3'].forEach(c=>$('#'+c).checked=false);$('#f-note').value='';
+};
+$('#lc').onclick=()=>{const b=+$('#l-bal').value,r=+$('#l-risk').value,s=+$('#l-sl').value;$('#l-out').textContent=s>0?`Lot size: ${(b*r/100/(s*100)).toFixed(2)} (risk $${(b*r/100).toFixed(2)})`:'SL distance daalo.'};
+$('#lim').value=LIM||'';$('#lim').onchange=e=>{LIM=+e.target.value||0;save();dash()};
+[['wl','s-wl'],['bal','s-bal'],['goal','s-goal']].forEach(([k,id])=>{$('#'+id).value=S[k]||'';$('#'+id).onchange=e=>{S[k]=+e.target.value||0;save();render()}});
+[['ai','s-ai'],['gk','s-gk'],['gm','s-gm'],['auto','s-auto']].forEach(([k,id])=>{$('#'+id).value=S[k]||'';$('#'+id).onchange=e=>{S[k]=e.target.value.trim();save();lab()}});
+
+function csv(text){
+  const del=text.includes('\t')?'\t':(text.split(';').length>text.split(',').length?';':',');
+  const rows=text.split(/\r?\n/).map(l=>l.split(del).map(c=>c.replace(/^"|"$/g,'').trim()));
+  const hi=rows.findIndex(r=>r.some(c=>/^symbol$/i.test(c))&&r.some(c=>/^type$/i.test(c)));
+  if(hi<0)return -1;
+  const h=rows[hi].map(c=>c.toLowerCase()),all=k=>h.reduce((x,c,i)=>(c===k&&x.push(i),x),[]);
+  const ix={sym:all('symbol')[0],ty:all('type')[0],vol:all('volume')[0],ot:all('time')[0],ct:all('time')[1],op:all('price')[0],cp:all('price')[1],sl:all('s / l')[0],pr:all('profit')[0],cm:all('commission')[0],sw:all('swap')[0]};
+  const num=s=>{const v=parseFloat(String(s==null?'':s).replace(/\s/g,'').replace(del===';'?',':/x^/,'.'));return isNaN(v)?0:v};
+  let c=0;
+  rows.slice(hi+1).forEach(r=>{
+    const ty=(r[ix.ty]||'').toLowerCase();if(ty!=='buy'&&ty!=='sell')return;
+    const ds=(r[ix.ot]||'').replace(/^(\d{4})\.(\d\d)\.(\d\d)\s+/,'$1-$2-$3T').slice(0,16);if(ds.length<16)return;
+    const en=num(r[ix.op]),lots=num(r[ix.vol]),sl=num(r[ix.sl]);
+    const pnl=num(r[ix.pr])+num(r[ix.cm])+num(r[ix.sw]);
+    if(T.some(t=>t.date===ds&&t.entry===en&&t.lots===lots))return;
+    const risk=sl&&sl!==en?Math.abs(en-sl)*lots*100:0;
+    T.push({id:'i'+Date.now()+c,date:ds,sym:r[ix.sym]||'XAUUSD',dir:ty,lots,entry:en,sl:sl||null,exit:num(r[ix.cp]),fee:num(r[ix.cm])+num(r[ix.sw]),pnl,r:risk?(num(r[ix.pr])/risk):null,ses:'',tag:'Import',mis:'Koi nahi',mood:'',chk:null,note:''});c++;
+  });
+  return c;
+}
+$('#imp').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{const c=csv(rd.result);if(c<0)$('#imsg').textContent='Symbol aur Type wale columns nahi mile. Positions wala CSV use karo.';else{save();render();$('#imsg').textContent=c+' trades import hue.'}};rd.readAsText(f)};
+$('#exp').onclick=async()=>{const dl=await cu('downloads');if(dl){try{await dl.save({filename:'gold-journal-backup.json',data:JSON.stringify({t:T,pb:PB,s:S,lim:LIM})})}catch(x){}return}const u=URL.createObjectURL(new Blob([JSON.stringify({t:T,pb:PB,s:S,lim:LIM})],{type:'application/json'}));const a=document.createElement('a');a.href=u;a.download='gold-journal-backup.json';a.click()};
+$('#rst').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);const o=Array.isArray(d)?{t:d}:d;if(o.t){T=o.t;PB=o.pb||[];S=Object.assign(S,o.s||{});LIM=o.lim||0;save();render()}}catch(x){}};rd.readAsText(f)};
+$('#clr').onclick=()=>{if(confirm('Saara data delete karna hai?')){T=[];save();render()}};
+function demo(){
+  T=T.filter(t=>!t.demo);let sd=7;const R=()=>(sd=(sd*16807)%2147483647)/2147483647,P=a=>a[R()*a.length|0];
+  const SS=[['Asia',3],['London',9],['New York',15],['Overlap',13]],now=new Date();
+  for(let i=0;i<40;i++){
+    const d=new Date(now);d.setDate(d.getDate()-Math.floor((39-i)*30/40));
+    while(d.getDay()%6===0)d.setDate(d.getDate()-1);
+    const [ses,h]=P(SS),dir=P(['buy','sell']),lots=P([0.05,0.1,0.2]),en=+(2600+R()*80).toFixed(2),dist=+(3+R()*4).toFixed(2);
+    const chk=R()<.6?3:P([1,2]),news=R()<.15?P(['NFP','FOMC','CPI']):'Koi nahi';
+    const pw=({Asia:.4,London:.62,'New York':.5,Overlap:.55})[ses]+(chk===3?.1:-.15)-(news!=='Koi nahi'?.2:0);
+    const win=R()<pw;let mis='Koi nahi';
+    if(!win&&R()<.5)mis=P(['FOMO','Revenge','SL hataya','Overtrade','Early exit']);
+    const s=dir==='buy'?1:-1,mv=win?dist*(.8+R()*1.7):-dist*(mis==='SL hataya'?2.2:.9+R()*.5);
+    const ex=+(en+s*mv).toFixed(2),gross=(ex-en)*s*lots*100,fee=+(lots*7).toFixed(2);
+    d.setHours(h,Math.floor(R()*60),0,0);
+    T.push({id:'d'+i,demo:1,date:ld(d)+'T'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0'),sym:'XAUUSD',dir,lots,entry:en,sl:+(en-s*dist).toFixed(2),exit:ex,fee,pnl:gross-fee,r:gross/(dist*lots*100),ses,tag:P(['Breakout','Pullback','Reversal']),mis,mood:mis!=='Koi nahi'?P(['Angry','Anxious']):P(['Calm','Calm','Excited']),news,chk,note:''});
+  }
+  save();render();
+}
+$('#dl').onclick=demo;
+async function callAI(p){
+  if(S.ai==='gemini'){
+    if(!S.gk)throw new Error('Tools mein Gemini key daalo');
+    const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(S.gm||'gemini-2.5-flash')+':generateContent?key='+encodeURIComponent(S.gk),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:p}]}]})});
+    const j=await r.json(),x=j.candidates&&j.candidates[0]&&j.candidates[0].content.parts[0].text;
+    if(!x)throw new Error((j.error&&j.error.message)||'Jawab nahi mila');return x;
+  }
+  const sm=await cu('sample');if(!sm)throw new Error('Built-in AI yahan available nahi hai');return (await sm(p)).text;
+}
+function autoRev(){
+  const a=sorted(),m=$('#msg');m.style.whiteSpace='pre-wrap';m.textContent='Trade save ho gaya. AI review aa raha hai...';
+  callAI('Tum XAUUSD trading coach ho. Hinglish mein sirf 3 chhote points mein sabse aakhri trade (last line) ka review do: kya sahi, kya galat, ek sudhaar. Signal ya financial advice nahi.\n\n'+brief(a.slice(-10))).then(t=>{m.textContent='Trade save ho gaya.\n\n'+t}).catch(e=>{m.textContent='Trade save ho gaya. (AI review nahi chala: '+((e&&e.message)||'')+')'});
+}
+async function aitag(){
+  const el=$('#ai-out'),L=sorted().filter(t=>t.pnl<0&&(!t.mis||t.mis==='Koi nahi')).slice(-20);
+  if(!L.length){el.textContent='Tag karne layak loss trade nahi mila.';return}
+  el.textContent='Tag kar raha hoon...';
+  try{
+    const txt=await callAI('Neeche losing trades hain. Har trade ke liye dekho ki galti thi ya nahi. Allowed galti: FOMO, Revenge, SL hataya, Overtrade, Early exit, Koi nahi. Sirf data se decide karo (SL ka na hona, achanak bada lot, peeche-peeche losses, note). Sirf JSON array do, aur kuch nahi: [{"id":"..","mis":".."}]\n\n'+L.map(t=>t.id+' | '+brief([t])).join('\n'));
+    const arr=JSON.parse(txt.match(/\[[\s\S]*\]/)[0]),ok=['FOMO','Revenge','SL hataya','Overtrade','Early exit'];let c=0;
+    arr.forEach(x=>{const t=T.find(y=>y.id===x.id);if(t&&ok.includes(x.mis)){t.mis=x.mis;c++}});
+    save();render();$('#ai-out').textContent=c+' trades par AI ne galti tag lagayi. Yeh andaza hai: Trades tab mein dropdown se badal sakte ho.';
+  }catch(e){el.textContent='Tagging nahi ho payi: '+((e&&e.message)||'AI ka jawab samajh nahi aaya')}
+}
+document.addEventListener('click',e=>{if(e.target.id==='ai4')aitag()});
+document.addEventListener('change',e=>{const id=e.target.dataset&&e.target.dataset.mis;if(!id)return;const t=T.find(y=>y.id===id);if(t){t.mis=e.target.value;save();render()}});
+function brief(a){return a.map(t=>[t.date.replace('T',' '),t.dir,t.lots+' lot','in '+t.entry,'sl '+(t.sl==null?'none':t.sl),'out '+t.exit,'pnl '+t.pnl.toFixed(1),t.r!=null?t.r.toFixed(2)+'R':'','ses '+(t.ses||'-'),'setup '+(t.tag||'-'),'galti '+(t.mis||'-'),'mood '+(t.mood||'-'),'news '+(t.news||'-'),'checklist '+(t.chk==null?'-':t.chk+'/3'),t.note||''].join(' | ')).join('\n')}
+async function ai(q,data){
+  const el=$('#ai-out');el.textContent='Soch raha hoon...';
+  const p='Tum ek XAUUSD trading coach ho. Hinglish mein, chhote aur saaf points mein jawab do. Sirf trader ke data ka analysis karo, financial advice ya buy/sell signal mat do. Jo data mein nahi hai woh mat banao.\n\nTRADES:\n'+data+'\n\nKAAM: '+q;
+  try{
+    let txt;
+    if(S.ai==='gemini'){
+      if(!S.gk){el.textContent='Tools mein Gemini API key daalo.';return}
+      const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(S.gm||'gemini-2.5-flash')+':generateContent?key='+encodeURIComponent(S.gk),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:p}]}]})});
+      const j=await r.json();txt=(j.candidates&&j.candidates[0]&&j.candidates[0].content.parts[0].text)||(j.error&&j.error.message)||'Jawab nahi mila.';
+    }else{
+      const sm=await cu('sample');
+      if(!sm){el.textContent='Built-in AI yahan available nahi hai. Tools mein Gemini chuno (apni hosting ya APK par chalega).';return}
+      txt=(await sm(p)).text;
+    }
+    el.textContent=txt;
+  }catch(e){el.textContent='AI nahi chala: '+((e&&e.message)||'network blocked')+(S.ai==='gemini'?'. Gemini is hosted page par blocked hai, apni hosting ya APK par chalega.':'')}
+}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b||!['ai1','ai2','ai3'].includes(b.id))return;const a=sorted();
+  if(!a.length){$('#ai-out').textContent='Pehle kuch trades daalo.';return}
+  if(b.id==='ai1')ai('Sabse aakhri trade (list ki last line) ka review karo: kya acha kiya, kya galti hui, aur pichle trades ke context mein ek sudhaar.',brief(a.slice(-15)));
+  if(b.id==='ai2'){const d=new Date();d.setDate(d.getDate()-7);const w=a.filter(t=>day(t)>=ld(d));ai('Pichle 7 din ki weekly report banao: strengths, weaknesses, sabse mehngi galti, aur agle hafte ke 3 action points.',brief(w.length?w:a.slice(-20)))}
+  if(b.id==='ai3'){const q=$('#ai-q').value.trim();if(q)ai('Trader ka sawal: '+q,brief(a.slice(-60)))}});
+(async()=>{const dc=await cu('dictation');if(dc){const m=$('#mic');m.style.display='';m.onclick=()=>dc.start().catch(()=>{});dc.onFinal(({text})=>{const n=$('#f-note');n.value+=(n.value?' ':'')+text})}})();
+$('#dr').onclick=()=>{T=T.filter(t=>!t.demo);save();render()};
+
+let th='dark';try{th=localStorage.getItem('gj_th')||'dark'}catch(e){}
+document.documentElement.dataset.theme=th;
+$('#th').onclick=()=>{th=th==='dark'?'light':'dark';document.documentElement.dataset.theme=th;try{localStorage.setItem('gj_th',th)}catch(e){}};
+render();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
